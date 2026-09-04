@@ -350,11 +350,13 @@
             </div>
 
             <!-- КНОПКА ДЛЯ ПРОДАВЦА -->
+            <button class="btn" onclick="createAndShareTrade()">Создать сделку</button>
             <div id="seller-action-area">
                 <button class="btn-submit" id="btn-seller-sent" onclick="sellerMarkSent()">📦 Я передал товар</button>
             </div>
 
             <!-- КНОПКА ДЛЯ ПОКУПАТЕЛЯ -->
+            <button class="btn" onclick="createAndShareTrade()">Создать сделку</button>
             <div id="buyer-action-area" style="display:none;">
                 <div id="buyer-wait-msg" style="font-size:12px; color:#94a3b8; text-align:center; padding: 10px 0;">
                     Ожидание, пока продавец передаст товар...
@@ -537,14 +539,6 @@ function createAndShareTrade() {
     tg.openTelegramLink(shareIntentUrl);
   } else {
     window.open(`https://t.me/share/url?url=${encodeURIComponent(tradeUrl)}&text=${encodeURIComponent(shareText)}`, '_blank');
-  }
-}
-  } else {
-    navigator.clipboard.writeText(tradeUrl).then(() => {
-      alert("✅ Ссылка скопирована!");
-    }).catch(() => {
-      prompt("Скопируйте ссылку вручную:", tradeUrl);
-    });
   }
 }
 
