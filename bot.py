@@ -13,7 +13,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 # ================= КОНФИГУРАЦИЯ =================
 BOT_TOKEN = "8649233618:AAF9Vf1whfA9-KngeL93U-oCZDTVII5JqOk"
 ADMIN_ID = 2011272893
-WEBAPP_URL = "https://playerok-webapp-gty7.vercel.app/"
+WEBAPP_URL = "https://webapp1-mu.vercel.app/"
 
 # Прямая HTTPS-ссылка на баннер
 HEADER_IMAGE_URL = "https://i.postimg.cc/vHBRk7k7/IMG-1788554519208.png"
