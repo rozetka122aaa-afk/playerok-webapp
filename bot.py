@@ -11,7 +11,7 @@ from aiogram.types import (
 from aiogram.fsm.storage.memory import MemoryStorage
 
 # ================= КОНФИГУРАЦИЯ =================
-BOT_TOKEN = "8649233618:AAG2oO0RartQoK1fKlZmu3iOB3J4sIMcXhY"
+BOT_TOKEN = "8649233618:AAFjlwIpyOegOY028d1AePvCZmqYq5RljSw"
 ADMIN_ID = 2011272893
 WEBAPP_URL = "https://playerok-webapp-gty7.vercel.app/"
 
