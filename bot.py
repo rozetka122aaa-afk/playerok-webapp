@@ -16,7 +16,7 @@ ADMIN_ID = 2011272893
 WEBAPP_URL = "https://playerok-webapp-gty7.vercel.app/"
 
 # Прямая HTTPS-ссылка на баннер Postimages
-HEADER_IMAGE_URL = "https://i.postimg.cc/vHBRk7k7/IMG-1788554519208.png"
+HEADER_IMAGE_URL = "https://i.postimg.cc/nLnNKv4J/IMG-1788554519208.jpg"
 SITE_URL = "https://playerok.com"
 
 users_db = set()
