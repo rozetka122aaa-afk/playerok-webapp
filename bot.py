@@ -11,7 +11,7 @@ from aiogram.types import (
 from aiogram.fsm.storage.memory import MemoryStorage
 
 # ================= КОНФИГУРАЦИЯ =================
-BOT_TOKEN = "8649233618:AAF9Vf1whfA9-KngeL93U-oCZDTVII5JqOk"
+BOT_TOKEN = "8649233618:AAEjA-3vMfWo6W9LcfmMbeo8g_LD8cMcDxQ"
 ADMIN_ID = 2011272893
 WEBAPP_URL = "https://webapp1-mu.vercel.app/"
 
