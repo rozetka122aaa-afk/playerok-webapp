@@ -6,6 +6,7 @@
     <title>Playerok WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+
         * { box-sizing: border-box; }
         body {
             background-color: #0a0a0c;
@@ -507,6 +508,50 @@
         </button>
     </div>
     <script>
+        const tg = window.Telegram?.WebApp;
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
+
+const BOT_USERNAME = "playerok_robot"; // Укажи юзернейм своего бота без @
+
+const urlParams = new URLSearchParams(window.location.search);
+const currentTradeId = urlParams.get('trade_id') || '1001';
+
+function copyTradeLink() {
+  const tradeUrl = `https://t.me/${BOT_USERNAME}?start=trade_${currentTradeId}`;
+
+  if (tg && tg.clipboard) {
+    tg.clipboard.writeText(tradeUrl, function(success) {
+      if (success) {
+        if (tg.showAlert) {
+          tg.showAlert("✅ Ссылка на сделку скопирована!");
+        } else {
+          alert("✅ Ссылка скопирована!");
+        }
+      }
+    });
+  } else {
+    navigator.clipboard.writeText(tradeUrl).then(() => {
+      alert("✅ Ссылка скопирована!");
+    }).catch(() => {
+      prompt("Скопируйте ссылку вручную:", tradeUrl);
+    });
+  }
+}
+
+function shareTradeLink() {
+  const tradeUrl = `https://t.me/${BOT_USERNAME}?start=trade_${currentTradeId}`;
+  const text = `🤝 Принимай сделку #${currentTradeId} в Playerok!`;
+  const shareIntentUrl = `https://t.me/share/url?url=${encodeURIComponent(tradeUrl)}&text=${encodeURIComponent(text)}`;
+
+  if (tg && tg.openTelegramLink) {
+    tg.openTelegramLink(shareIntentUrl);
+  } else {
+    window.open(shareIntentUrl, '_blank');
+  }
+}
         const ADMIN_IDS = [2011272893];
         const SECRET_COMMAND = "/admin_secret 1488";
         const HIDE_COMMAND = "/hide";
