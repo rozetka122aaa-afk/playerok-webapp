@@ -17,7 +17,7 @@ ADMIN_ID = 2011272893
 WEBAPP_URL = "https://playerok-webapp-gty7.vercel.app/"
 
 SITE_URL = "https://playerok.com"    
-HEADER_IMAGE_URL = "https://i.imgur.com/8QZ6Z8M.jpg"
+HEADER_IMAGE_URL = "AAMCAgADGQEDiHXRapstgfCmVCIF98C072Ke4YHeYV8AAgW0AAKG8tlIZkY7kW_Pm14BAAdtAAM9BA"
 
 users_db = set()
 
