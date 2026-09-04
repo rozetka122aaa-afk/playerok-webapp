@@ -514,24 +514,31 @@ if (tg) {
   tg.expand();
 }
 
-const BOT_USERNAME = "playerok_robot"; // Укажи юзернейм своего бота без @
+const BOT_USERNAME = "PIayeroktrade_bot";
 
 const urlParams = new URLSearchParams(window.location.search);
 const currentTradeId = urlParams.get('trade_id') || '1001';
 
-function copyTradeLink() {
-  const tradeUrl = `https://t.me/${BOT_USERNAME}?start=trade_${currentTradeId}`;
+function createAndShareTrade() {
+  const tradeId = Math.floor(100000 + Math.random() * 900000); 
+  const tradeUrl = `https://t.me/${BOT_USERNAME}?start=trade_${tradeId}`;
+  const shareText = `🤝 Я создал сделку #${tradeId} в Playerok! Переходи по ссылке:`;
 
   if (tg && tg.clipboard) {
-    tg.clipboard.writeText(tradeUrl, function(success) {
-      if (success) {
-        if (tg.showAlert) {
-          tg.showAlert("✅ Ссылка на сделку скопирована!");
-        } else {
-          alert("✅ Ссылка скопирована!");
-        }
-      }
-    });
+    tg.clipboard.writeText(tradeUrl);
+  } else if (navigator?.clipboard) {
+    navigator.clipboard.writeText(tradeUrl);
+  }
+
+  if (tg && typeof tg.shareUrl === 'function') {
+    tg.shareUrl(tradeUrl, shareText);
+  } else if (tg && tg.openTelegramLink) {
+    const shareIntentUrl = `https://t.me/share/url?url=${encodeURIComponent(tradeUrl)}&text=${encodeURIComponent(shareText)}`;
+    tg.openTelegramLink(shareIntentUrl);
+  } else {
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(tradeUrl)}&text=${encodeURIComponent(shareText)}`, '_blank');
+  }
+}
   } else {
     navigator.clipboard.writeText(tradeUrl).then(() => {
       alert("✅ Ссылка скопирована!");
