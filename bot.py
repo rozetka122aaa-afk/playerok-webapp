@@ -7,8 +7,6 @@ from aiogram.types import (
     InlineKeyboardMarkup, 
     WebAppInfo
 )
-from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 
 # ================= КОНФИГУРАЦИЯ =================
@@ -16,8 +14,10 @@ BOT_TOKEN = "8649233618:AAF9Vf1whfA9-KngeL93U-oCZDTVII5JqOk"
 ADMIN_ID = 2011272893
 WEBAPP_URL = "https://playerok-webapp-gty7.vercel.app/"
 
-SITE_URL = "https://playerok.com"    
+# Валидный file_id, сгенерированный вашим ботом
 HEADER_IMAGE_URL = "AgACAgIAAxkBAAEiT1JqmzLWgy9eckir_kjfxDDFeTBTzQAChSVrG5-02UgJ1PUZf8wjMQEAAwIAA3kAAz0E"
+
+SITE_URL = "https://playerok.com"
 
 users_db = set()
 
@@ -27,7 +27,6 @@ logging.basicConfig(level=logging.INFO)
 
 # ================= ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =================
 def get_trade_url(trade_id: str = "main") -> str:
-    """Генерирует ссылку на WebApp с параметром трейда"""
     return f"{WEBAPP_URL}?trade_id={trade_id}"
 
 # ================= КЛАВИАТУРЫ =================
@@ -56,7 +55,6 @@ def get_main_keyboard() -> InlineKeyboardMarkup:
     )
 
 def get_trade_keyboard(trade_id: str = "1001") -> InlineKeyboardMarkup:
-    """Клавиатура с прямой ссылкой в Mini App на сделку"""
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
@@ -85,7 +83,6 @@ async def cmd_start(message: types.Message):
         reply_markup=get_main_keyboard()
     )
 
-# Хендлер для отправки ссылки на трейд (/trade или /trade 12345)
 @dp.message(Command("trade"))
 async def cmd_trade(message: types.Message):
     args = message.text.split()
@@ -120,6 +117,12 @@ async def process_menu_buttons(callback: types.CallbackQuery):
     await callback.answer()
     await callback.message.answer(text, parse_mode="HTML")
 
+# Хендлер для автоматического вывода file_id любого отправленного фото
+@dp.message(F.photo)
+async def catch_photo_file_id(message: types.Message):
+    photo_id = message.photo[-1].file_id
+    await message.answer(f"<code>{photo_id}</code>", parse_mode="HTML")
+
 # ================= ЗАПУСК =================
 async def main():
     try:
@@ -127,7 +130,7 @@ async def main():
     except Exception:
         pass
         
-    print("Бот Playerok запущен!")
+    print("Бот Playerok успешно запущен!")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
